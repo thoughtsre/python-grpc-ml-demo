@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package mlpredictions;
+
+service MlPredictions {
+
+    rpc PredictSingleImage(Image) returns (Prediction) {}
+
+    rpc PredictMultipleImages(stream Image) returns (stream Prediction) {}
+
+}
+
+message Image {
+    string mode = 1;
+    int32 width = 2;
+    int32 height = 3;
+    bytes data = 4;
+}
+
+message Prediction {
+    string prediction = 1;
+}

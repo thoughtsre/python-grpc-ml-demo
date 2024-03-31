@@ -38,7 +38,15 @@ path = "src/python_grpc_ml_demo/__about__.py"
 dependencies = [
   "coverage[toml]>=6.5",
   "pytest",
+  "grpcio",
+  "grpcio-tools",
+  "torch",
+  "torchvision",
+  "pillow",
+  "grpcio-status",
+  "googleapis-common-protos"
 ]
+
 [tool.hatch.envs.default.scripts]
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
@@ -52,7 +60,16 @@ cov = [
 ]
 
 [[tool.hatch.envs.all.matrix]]
-python = ["3.7", "3.8", "3.9", "3.10", "3.11"]
+python = ["3.9", "3.10", "3.11"]
+
+[tool.hatch.envs.expt]
+path=".devenv"
+extra-dependencies = [
+  "jupyterlab",
+]
+
+[tool.hatch.envs.expt.scripts]
+gencode = "python -m grpc_tools.protoc -Isrc/python_grpc_ml_demo --python_out=src/python_grpc_ml_demo/lib --pyi_out=src/python_grpc_ml_demo/lib --grpc_python_out=src/python_grpc_ml_demo/lib src/python_grpc_ml_demo/protos/ml_predictions.proto"
 
 [tool.hatch.envs.lint]
 detached = true
@@ -62,7 +79,7 @@ dependencies = [
   "ruff>=0.0.243",
 ]
 [tool.hatch.envs.lint.scripts]
-typing = "mypy --install-types --non-interactive {args:src/python_grpc_ml_demo tests}"
+typing = "mypy --install-types --non-interactive {args:src/python-grpc-ml-demo tests}"
 style = [
   "ruff {args:.}",
   "black --check --diff {args:.}",
@@ -146,7 +163,7 @@ omit = [
 ]
 
 [tool.coverage.paths]
-python_grpc_ml_demo = ["src/python_grpc_ml_demo", "*/python-grpc-ml-demo/src/python_grpc_ml_demo"]
+python_grpc_ml_demo = ["src/python_grpc_ml_demo", "*/python_grpc_ml_demo/src/python_grpc_ml_demo"]
 tests = ["tests", "*/python-grpc-ml-demo/tests"]
 
 [tool.coverage.report]
