@@ -18,5 +18,14 @@ message Image {
 }
 
 message Prediction {
-    string prediction = 1;
+    float xmin = 1;
+    float ymin = 2;
+    float xmax = 3;
+    float ymax = 4;
+    string name = 5;
 }
+
+message PredictionCollection {
+    repeated Prediction all_objects = 1;
+}
+

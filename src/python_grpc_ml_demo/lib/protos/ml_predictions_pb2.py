@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bprotos/ml_predictions.proto\x12\rmlpredictions\"B\n\x05Image\x12\x0c\n\x04mode\x18\x01 \x01(\t\x12\r\n\x05width\x18\x02 \x01(\x05\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x04 \x01(\x0c\" \n\nPrediction\x12\x12\n\nprediction\x18\x01 \x01(\t2\xa8\x01\n\rMlPredictions\x12G\n\x12PredictSingleImage\x12\x14.mlpredictions.Image\x1a\x19.mlpredictions.Prediction\"\x00\x12N\n\x15PredictMultipleImages\x12\x14.mlpredictions.Image\x1a\x19.mlpredictions.Prediction\"\x00(\x01\x30\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bprotos/ml_predictions.proto\x12\rmlpredictions\"B\n\x05Image\x12\x0c\n\x04mode\x18\x01 \x01(\t\x12\r\n\x05width\x18\x02 \x01(\x05\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x04 \x01(\x0c\"R\n\nPrediction\x12\x0c\n\x04xmin\x18\x01 \x01(\x02\x12\x0c\n\x04ymin\x18\x02 \x01(\x02\x12\x0c\n\x04xmax\x18\x03 \x01(\x02\x12\x0c\n\x04ymax\x18\x04 \x01(\x02\x12\x0c\n\x04name\x18\x05 \x01(\t\"F\n\x14PredictionCollection\x12.\n\x0b\x61ll_objects\x18\x01 \x03(\x0b\x32\x19.mlpredictions.Prediction2\xa8\x01\n\rMlPredictions\x12G\n\x12PredictSingleImage\x12\x14.mlpredictions.Image\x1a\x19.mlpredictions.Prediction\"\x00\x12N\n\x15PredictMultipleImages\x12\x14.mlpredictions.Image\x1a\x19.mlpredictions.Prediction\"\x00(\x01\x30\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -24,7 +24,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_IMAGE']._serialized_start=46
   _globals['_IMAGE']._serialized_end=112
   _globals['_PREDICTION']._serialized_start=114
-  _globals['_PREDICTION']._serialized_end=146
-  _globals['_MLPREDICTIONS']._serialized_start=149
-  _globals['_MLPREDICTIONS']._serialized_end=317
+  _globals['_PREDICTION']._serialized_end=196
+  _globals['_PREDICTIONCOLLECTION']._serialized_start=198
+  _globals['_PREDICTIONCOLLECTION']._serialized_end=268
+  _globals['_MLPREDICTIONS']._serialized_start=271
+  _globals['_MLPREDICTIONS']._serialized_end=439
 # @@protoc_insertion_point(module_scope)

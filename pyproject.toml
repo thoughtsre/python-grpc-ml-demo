@@ -44,7 +44,8 @@ dependencies = [
   "torchvision",
   "pillow",
   "grpcio-status",
-  "googleapis-common-protos"
+  "googleapis-common-protos",
+  "ultralytics"
 ]
 
 [tool.hatch.envs.default.scripts]
