@@ -49,6 +49,8 @@ dependencies = [
 ]
 
 [tool.hatch.envs.default.scripts]
+serve = "python src/python_grpc_ml_demo/server.py"
+demo = "python src/python_grpc_ml_demo/client.py"
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
 cov-report = [
@@ -70,7 +72,7 @@ extra-dependencies = [
 ]
 
 [tool.hatch.envs.expt.scripts]
-gencode = "python -m grpc_tools.protoc -Isrc/python_grpc_ml_demo --python_out=src/python_grpc_ml_demo/lib --pyi_out=src/python_grpc_ml_demo/lib --grpc_python_out=src/python_grpc_ml_demo/lib src/python_grpc_ml_demo/protos/ml_predictions.proto"
+gencode = "python -m grpc_tools.protoc -Isrc/python_grpc_ml_demo --python_out=src/python_grpc_ml_demo --pyi_out=src/python_grpc_ml_demo --grpc_python_out=src/python_grpc_ml_demo src/python_grpc_ml_demo/lib/ml_predictions.proto"
 
 [tool.hatch.envs.lint]
 detached = true

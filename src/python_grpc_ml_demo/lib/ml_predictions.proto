@@ -4,9 +4,9 @@ package mlpredictions;
 
 service MlPredictions {
 
-    rpc PredictSingleImage(Image) returns (Prediction) {}
+    rpc PredictSingleImage(Image) returns (PredictionCollection) {}
 
-    rpc PredictMultipleImages(stream Image) returns (stream Prediction) {}
+    rpc PredictMultipleImages(stream Image) returns (stream PredictionCollection) {}
 
 }
 
@@ -26,6 +26,6 @@ message Prediction {
 }
 
 message PredictionCollection {
-    repeated Prediction all_objects = 1;
+    repeated Prediction object = 1;
 }
 

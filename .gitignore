@@ -5,3 +5,11 @@ __pycache__
 
 # ignore development virtual env
 .devenv
+
+# ignore assets folder. used to contain images and videos for dev
+assets
+
+# data assets
+*.mp4
+*.jpg
+*.pt

@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from protos import ml_predictions_pb2 as protos_dot_ml__predictions__pb2
+from lib import ml_predictions_pb2 as lib_dot_ml__predictions__pb2
 
 
 class MlPredictionsStub(object):
@@ -16,13 +16,13 @@ class MlPredictionsStub(object):
         """
         self.PredictSingleImage = channel.unary_unary(
                 '/mlpredictions.MlPredictions/PredictSingleImage',
-                request_serializer=protos_dot_ml__predictions__pb2.Image.SerializeToString,
-                response_deserializer=protos_dot_ml__predictions__pb2.Prediction.FromString,
+                request_serializer=lib_dot_ml__predictions__pb2.Image.SerializeToString,
+                response_deserializer=lib_dot_ml__predictions__pb2.PredictionCollection.FromString,
                 )
         self.PredictMultipleImages = channel.stream_stream(
                 '/mlpredictions.MlPredictions/PredictMultipleImages',
-                request_serializer=protos_dot_ml__predictions__pb2.Image.SerializeToString,
-                response_deserializer=protos_dot_ml__predictions__pb2.Prediction.FromString,
+                request_serializer=lib_dot_ml__predictions__pb2.Image.SerializeToString,
+                response_deserializer=lib_dot_ml__predictions__pb2.PredictionCollection.FromString,
                 )
 
 
@@ -46,13 +46,13 @@ def add_MlPredictionsServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'PredictSingleImage': grpc.unary_unary_rpc_method_handler(
                     servicer.PredictSingleImage,
-                    request_deserializer=protos_dot_ml__predictions__pb2.Image.FromString,
-                    response_serializer=protos_dot_ml__predictions__pb2.Prediction.SerializeToString,
+                    request_deserializer=lib_dot_ml__predictions__pb2.Image.FromString,
+                    response_serializer=lib_dot_ml__predictions__pb2.PredictionCollection.SerializeToString,
             ),
             'PredictMultipleImages': grpc.stream_stream_rpc_method_handler(
                     servicer.PredictMultipleImages,
-                    request_deserializer=protos_dot_ml__predictions__pb2.Image.FromString,
-                    response_serializer=protos_dot_ml__predictions__pb2.Prediction.SerializeToString,
+                    request_deserializer=lib_dot_ml__predictions__pb2.Image.FromString,
+                    response_serializer=lib_dot_ml__predictions__pb2.PredictionCollection.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -76,8 +76,8 @@ class MlPredictions(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/mlpredictions.MlPredictions/PredictSingleImage',
-            protos_dot_ml__predictions__pb2.Image.SerializeToString,
-            protos_dot_ml__predictions__pb2.Prediction.FromString,
+            lib_dot_ml__predictions__pb2.Image.SerializeToString,
+            lib_dot_ml__predictions__pb2.PredictionCollection.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -93,7 +93,7 @@ class MlPredictions(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.stream_stream(request_iterator, target, '/mlpredictions.MlPredictions/PredictMultipleImages',
-            protos_dot_ml__predictions__pb2.Image.SerializeToString,
-            protos_dot_ml__predictions__pb2.Prediction.FromString,
+            lib_dot_ml__predictions__pb2.Image.SerializeToString,
+            lib_dot_ml__predictions__pb2.PredictionCollection.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

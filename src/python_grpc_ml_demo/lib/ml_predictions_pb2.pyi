@@ -32,7 +32,7 @@ class Prediction(_message.Message):
     def __init__(self, xmin: _Optional[float] = ..., ymin: _Optional[float] = ..., xmax: _Optional[float] = ..., ymax: _Optional[float] = ..., name: _Optional[str] = ...) -> None: ...
 
 class PredictionCollection(_message.Message):
-    __slots__ = ("all_objects",)
-    ALL_OBJECTS_FIELD_NUMBER: _ClassVar[int]
-    all_objects: _containers.RepeatedCompositeFieldContainer[Prediction]
-    def __init__(self, all_objects: _Optional[_Iterable[_Union[Prediction, _Mapping]]] = ...) -> None: ...
+    __slots__ = ("object",)
+    OBJECT_FIELD_NUMBER: _ClassVar[int]
+    object: _containers.RepeatedCompositeFieldContainer[Prediction]
+    def __init__(self, object: _Optional[_Iterable[_Union[Prediction, _Mapping]]] = ...) -> None: ...
