@@ -45,7 +45,8 @@ dependencies = [
   "pillow",
   "grpcio-status",
   "googleapis-common-protos",
-  "ultralytics"
+  "ultralytics",
+  "gradio"
 ]
 
 [tool.hatch.envs.default.scripts]

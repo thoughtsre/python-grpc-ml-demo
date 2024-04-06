@@ -1,50 +1,64 @@
 from PIL import Image as I
 import grpc
 import cv2
+import gradio as gr
 
 from lib.ml_predictions_pb2_grpc import MlPredictionsStub
 from lib.ml_predictions_pb2 import Image
+from lib.utils import *
 
 
-def pil_to_proto(img: I) -> Image:
+# def pil_to_proto(img: I) -> Image:
     
-    (i_width, i_height) = img.size
+#     (i_width, i_height) = img.size
     
-    return Image(mode=img.mode,
-                 width=i_width,
-                 height=i_height,
-                 data=img.tobytes()
-                 )
+#     return Image(mode=img.mode,
+#                  width=i_width,
+#                  height=i_height,
+#                  data=img.tobytes()
+#                  )
     
-def frame_to_pil(frame) -> I:
+# def frame_to_pil(frame) -> I:
     
-    return I.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+#     return I.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
 
-def video_stream(filepath: str, yield_every=5, max_frames=None):
+# def video_stream(filepath, size=(960, 540), yield_every=5, max_frames=None):
     
-    vid = cv2.VideoCapture(filepath)
+#     vid = cv2.VideoCapture(filepath)
     
-    assert vid.isOpened(), "Video file not found!"
+#     assert vid.isOpened(), "Video file not found!"
     
-    cur_frame = 0
+#     cur_frame = 0
     
-    while True:
+#     while True:
         
-        ret, f = vid.read()
+#         ret, f = vid.read()
         
-        cur_frame += 1
+#         cur_frame += 1
         
-        if (not ret) or (cur_frame >= max_frames):
+#         if (not ret) or (max_frames and (cur_frame >= max_frames)):
             
-            break
+#             break
         
-        if yield_every & ((cur_frame % yield_every) == 0):
+#         if yield_every & ((cur_frame % yield_every) == 0):
             
-            yield frame_to_pil(f)
+#             yield frame_to_pil(f).resize(size)
             
-    vid.release()
+#     vid.release()
     
-    return
+#     return
+
+# def proto_stream(frame_stream):
+    
+#     for f in frame_stream:
+        
+#         yield pil_to_proto(f)
+
+def run(stub):
+    
+    demo = gr.Interface(fn=lambda x: x, inputs = ["text"], outputs = ["text"])
+    
+    demo.launch()
         
 
 if __name__ == "__main__":
@@ -53,7 +67,9 @@ if __name__ == "__main__":
         
         stub = MlPredictionsStub(channel)
         
+        # run(stub)
         img = I.open("assets/cat_dog.jpg")
+        print(img)
         
         img_proto = pil_to_proto(img)
         
@@ -63,7 +79,9 @@ if __name__ == "__main__":
         
         vid_frame_stream = video_stream("assets/KFC.mp4")
         
-        for r in stub.PredictMultipleImages(vid_frame_stream):
+        resp = stub.PredictMultipleImages(proto_stream(vid_frame_stream))
+        
+        for r in resp:
             
             print(r)
-        
+            

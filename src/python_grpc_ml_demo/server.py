@@ -6,22 +6,7 @@ from concurrent import futures
 
 from lib.ml_predictions_pb2_grpc import MlPredictionsServicer, add_MlPredictionsServicer_to_server
 from lib.ml_predictions_pb2 import *
-
-
-def convert_image_proto(image_proto): 
-    return I.frombytes(image_proto.mode, 
-                       (image_proto.width, image_proto.height),
-                       image_proto.data)
-    
-def to_protobuf_prediction(predictions):
-    
-    return [Prediction(
-        xmin = _["xmin"],
-        ymin = _["ymin"],
-        xmax = _["xmax"],
-        ymax = _["ymax"],
-        name = _["name"]) for _ in predictions]
-    
+from lib.utils import *
     
 logger = logging.getLogger(__name__)
     
@@ -45,7 +30,7 @@ class PredictionServicer(MlPredictionsServicer):
         
         img = convert_image_proto(request)
         
-        results = self.model([img]).pandas().xyxy[0].to_dict(orient="records")
+        results = torch_pred_to_json(self.model([img]))
         
         return PredictionCollection(object = to_protobuf_prediction(results))
         
@@ -62,9 +47,13 @@ class PredictionServicer(MlPredictionsServicer):
         
         for i, req in enumerate(request_iterator):
             
-            logger.info(f"... frame ${i+1}")
+            logger.info(f"... frame {i+1}")
             
             yield self.__predict_one(req)
+            
+        logger.info(f"End of predictions.")
+        
+        return
             
             
 
