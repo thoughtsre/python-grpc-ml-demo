@@ -1,0 +1,9 @@
+grpcio
+grpcio-tools
+torch
+torchvision
+pillow
+grpcio-status
+googleapis-common-protos
+ultralytics
+gradio

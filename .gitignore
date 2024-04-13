@@ -13,3 +13,4 @@ assets
 *.mp4
 *.jpg
 *.pt
+!docs/*
