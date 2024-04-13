@@ -56,7 +56,7 @@ def draw_annotations(image: I, results: List[Message]) -> I.Image:
 
     for res in results:
 
-        logging.info(f"xmin: {res.xmin}, xmax: {res.xmax}, ymin: {res.ymin}, ymax: {res.ymax}")
+        # logging.info(f"xmin: {res.xmin}, xmax: {res.xmax}, ymin: {res.ymin}, ymax: {res.ymax}")
 
         scale = int(res.xmax - res.xmin)
         font = ImageFont.load_default(size=max(10, scale / 10))

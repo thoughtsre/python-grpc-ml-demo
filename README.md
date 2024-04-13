@@ -68,6 +68,7 @@ Predict objects in video frames. (See [`PredictMultipleImages`](src/python_grpc_
 
 You will see that multiple predictions can be made in a single connection.
 
+From server logs.
 ```shell
 INFO:__main__:Predicting multiple frames/images...
 INFO:__main__:[RECEIVED FROM STREAM] frame 24
@@ -83,4 +84,20 @@ INFO:__main__:[RECEIVED FROM STREAM] frame 1320
 INFO:__main__:[RECEIVED FROM STREAM] frame 1344
 INFO:__main__:[RECEIVED FROM STREAM] frame 1368
 INFO:__main__:End of predictions.
+```
+
+From client logs.
+```shell
+INFO:root:[RESULTS RECEIVED]... frame 24
+INFO:root:[RESULTS RECEIVED]... frame 48
+INFO:root:[RESULTS RECEIVED]... frame 72
+INFO:root:[RESULTS RECEIVED]... frame 96
+INFO:root:[RESULTS RECEIVED]... frame 120
+INFO:root:[RESULTS RECEIVED]... frame 144
+
+...
+
+INFO:root:[RESULTS RECEIVED]... frame 1320
+INFO:root:[RESULTS RECEIVED]... frame 1344
+INFO:root:[RESULTS RECEIVED]... frame 1368
 ```

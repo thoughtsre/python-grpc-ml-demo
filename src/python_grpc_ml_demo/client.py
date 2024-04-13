@@ -6,7 +6,7 @@ from lib.ml_predictions_pb2_grpc import MlPredictionsStub
 from lib.modules import *
 from lib.utils import *
 
-logging.basicConfig(level=logging.WARN)
+logging.basicConfig(level=logging.INFO)
 
 
 def run(stub):

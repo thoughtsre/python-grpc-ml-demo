@@ -123,6 +123,8 @@ class VideoModule:
         all_preds = []
 
         for res in resp:
+            
+            logging.info(f"[RESULTS RECEIVED]... frame {res.frame}")
 
             image = self.frames[res.frame]
 
