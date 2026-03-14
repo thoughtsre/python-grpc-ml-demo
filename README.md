@@ -1,3 +1,5 @@
+> **This repo has been migrated to [GitHub](https://github.com/thoughtsre/python-grpc-ml-demo).**
+
 # ML Predictions with gRPC in Python
 
 ## Motivation
